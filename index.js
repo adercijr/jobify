@@ -8,6 +8,11 @@ const dbConnection = sqlite.open(path.resolve(__dirname, 'banco.sqlite'), { Prom
 
 const port = process.env.PORT || 3000
 
+app.use('/admin', (req, res, next) => {
+    if(req.hostname === 'localhost') {
+        next()
+    }
+})
 
 app.set('views', path.join(__dirname, 'views'))//para garantir que ele vai encontrar nossos views. __dirname, caminho para views
 
